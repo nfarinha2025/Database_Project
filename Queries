@@ -34,3 +34,22 @@ MariaDB [liverpool_fc]> SELECT player_id, first_name, last_name, position, squad
         |        14 | Curtis     | Jones              | Midfielder |           17 |
         +-----------+------------+--------------------+------------+--------------+
         25 rows in set (0.034 sec)
+
+
+Query 2: SELECT with a calculated field
+This query calculates minutes played as hours for readability. Analysts may use this to quickly convert match time into hours.
+
+MariaDB [liverpool_fc]> SELECT stat_id, player_id, match_id,
+    ->        minutes_played / 60 AS hours_played
+    -> FROM player_stats
+    -> LIMIT 5;
+        +---------+-----------+----------+--------------+
+        | stat_id | player_id | match_id | hours_played |
+        +---------+-----------+----------+--------------+
+        |      61 |         1 |        1 |       1.5000 |
+        |      62 |         9 |        1 |       1.5000 |
+        |      63 |         2 |        1 |       1.5000 |
+        |      64 |         3 |        1 |       1.5000 |
+        |      65 |         5 |        1 |       1.5000 |
+        +---------+-----------+----------+--------------+
+        5 rows in set (0.031 sec)

@@ -14,7 +14,7 @@ End users will interact with the database through SQL queries, views, and dashbo
 
 2.ER Model
 
-![Liverpool ER Diagram](liverpool.png)
+![Liverpool ER Diagram](liverpool_ER.png)
 
 Overall Design Description 
 

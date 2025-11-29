@@ -4,7 +4,7 @@ This query retrieves players ordered first by their position and then by squad n
 MariaDB [liverpool_fc]> SELECT player_id, first_name, last_name, position, squad_number
     -> FROM players
     -> ORDER BY position ASC, squad_number ASC;
-+-----------+------------+--------------------+------------+--------------+
+        +-----------+------------+--------------------+------------+--------------+
         | player_id | first_name | last_name          | position   | squad_number |
         +-----------+------------+--------------------+------------+--------------+
         |         2 | Virgil     | van Dijk           | Defender   |            4 |

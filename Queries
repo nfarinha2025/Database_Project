@@ -1,5 +1,5 @@
 Query 1: SELECT with ORDER BY two or more columns
-This query retrieves players ordered first by their position and then by squad number. Coaches might use this to quickly see the roster grouped by role and sorted by jersey number.
+The query retrieves players ordered first by their position and then by squad number. Coaches might use this to quickly see the roster grouped by role and sorted by jersey number.
 
 MariaDB [liverpool_fc]> SELECT player_id, first_name, last_name, position, squad_number
     -> FROM players
@@ -53,3 +53,145 @@ MariaDB [liverpool_fc]> SELECT stat_id, player_id, match_id,
         |      65 |         5 |        1 |       1.5000 |
         +---------+-----------+----------+--------------+
         5 rows in set (0.031 sec)
+
+Query 3: SELECT using a MariaDB function
+This query takes out the month from match dates. Useful for analyzing seasonal performance trends.
+
+MariaDB [liverpool_fc]> SELECT match_id, match_date, MONTH(match_date) AS match_month
+    -> FROM matches
+    -> LIMIT 5;
+        +----------+------------+-------------+
+        | match_id | match_date | match_month |
+        +----------+------------+-------------+
+        |        1 | 2019-06-01 |           6 |
+        |        2 | 2020-06-25 |           6 |
+        |        3 | 2020-07-22 |           7 |
+        |        4 | 2021-05-23 |           5 |
+        |        5 | 2022-05-28 |           5 |
+        +----------+------------+-------------+
+        5 rows in set (0.004 sec)
+
+Query 4: Aggregation with GROUP BY and HAVING
+This query counts total goals per player and filters only those with more than 5 goals. Analysts use this to identify top scorers.
+
+MariaDB [liverpool_fc]> SELECT player_id, SUM(goals) AS total_goals
+    -> FROM player_stats
+    -> GROUP BY player_id
+    -> HAVING SUM(goals) > 5
+        -> ORDER BY total_goals DESC;
+        +-----------+-------------+
+        | player_id | total_goals |
+        +-----------+-------------+
+        |         1 |          19 |
+        |        16 |           7 |
+        +-----------+-------------+
+
+Query 5: Join of three tables
+This query joins players, player_stats, and matches to show who scored in which match. Useful for match reports.
+
+MariaDB [liverpool_fc]> SELECT p.first_name, p.last_name, m.match_date, ps.goals
+    -> FROM player_stats ps
+    -> INNER JOIN players p ON ps.player_id = p.player_id
+    -> INNER JOIN matches m ON ps.match_id = m.match_id
+    -> WHERE ps.goals > 0
+    -> LIMIT 5;
++------------+-----------+------------+-------+
+| first_name | last_name | match_date | goals |
++------------+-----------+------------+-------+
+| Mohamed    | Salah     | 2019-06-01 |     1 |
+| Mohamed    | Salah     | 2020-06-25 |     2 |
+| Roberto    | Firmino   | 2020-06-25 |     1 |
+| Mohamed    | Salah     | 2020-07-22 |     1 |
+| Darwin     | Nunez     | 2020-07-22 |     1 |
++------------+-----------+------------+-------+
+5 rows in set (0.005 sec)
+
+Query 6: LEFT JOIN
+This query shows all staff and their roles, even if some staff don’t yet have a role assigned. Useful for HR audits.
+
+MariaDB [liverpool_fc]> SELECT s.staff_id, s.first_name, s.last_name, sr.role_name
+    -> FROM staff s
+    -> LEFT JOIN staff_roles sr ON s.role_id = sr.role_id;
++----------+------------+-----------+-----------+
+| staff_id | first_name | last_name | role_name |
++----------+------------+-----------+-----------+
+|        1 | Jürgen     | Klopp     | NULL      |
+|        2 | Arne       | Slot      | NULL      |
+|        3 | Pepijn     | Lijnders  | NULL      |
+|        4 | Andreas    | Kornmayer | NULL      |
++----------+------------+-----------+-----------+
+4 rows in set (0.002 sec)
+
+Query 7: UPDATE query
+This query updates Klopp’s role to Manager. Used when staff assignments change.
+
+MariaDB [liverpool_fc]> UPDATE staff
+    -> SET role_id = 4
+    -> WHERE staff_id = 1;
+Query OK, 1 row affected (0.010 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query 8: DELETE query
+This query deletes an injury record for demonstration. Used when correcting erroneous entries.
+
+MariaDB [liverpool_fc]> DELETE FROM injuries
+    -> WHERE injury_id = 12;
+Query OK, 1 row affected (0.001 sec)
+
+Query 9: Create a View and use it
+This query creates a view showing player goals per match, then selects from it. Views simplify repeated queries.
+
+MariaDB [liverpool_fc]> CREATE VIEW player_goals AS
+    -> SELECT p.first_name, p.last_name, m.match_date, ps.goals
+    -> FROM player_stats ps
+    -> JOIN players p ON ps.player_id = p.player_id
+    -> JOIN matches m ON ps.match_id = m.match_id;
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB [liverpool_fc]> 
+MariaDB [liverpool_fc]> SELECT * FROM player_goals
+    -> WHERE goals > 0
+    -> LIMIT 5;
++------------+-----------+------------+-------+
+| first_name | last_name | match_date | goals |
++------------+-----------+------------+-------+
+| Mohamed    | Salah     | 2019-06-01 |     1 |
+| Mohamed    | Salah     | 2020-06-25 |     2 |
+| Roberto    | Firmino   | 2020-06-25 |     1 |
+| Mohamed    | Salah     | 2020-07-22 |     1 |
+| Darwin     | Nunez     | 2020-07-22 |     1 |
++------------+-----------+------------+-------+
+5 rows in set (0.003 sec)
+
+Query 10: Transaction with ROLLBACK
+This query demonstrates a transaction: updating a player’s squad number, then rolling back. Transactions ensure safe changes.
+
+MariaDB [liverpool_fc]> 
+MariaDB [liverpool_fc]> -- Check temporary change
+MariaDB [liverpool_fc]> SELECT player_id, first_name, last_name, squad_number
+    -> FROM players
+    -> WHERE player_id = 1;
++-----------+------------+-----------+--------------+
+| player_id | first_name | last_name | squad_number |
++-----------+------------+-----------+--------------+
+|         1 | Mohamed    | Salah     |           99 |
++-----------+------------+-----------+--------------+
+1 row in set (0.002 sec)
+
+MariaDB [liverpool_fc]> 
+MariaDB [liverpool_fc]> ROLLBACK;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [liverpool_fc]> 
+MariaDB [liverpool_fc]> -- Verify rollback
+MariaDB [liverpool_fc]> SELECT player_id, first_name, last_name, squad_number
+    -> FROM players
+    -> WHERE player_id = 1;
++-----------+------------+-----------+--------------+
+| player_id | first_name | last_name | squad_number |
++-----------+------------+-----------+--------------+
+|         1 | Mohamed    | Salah     |           11 |
++-----------+------------+-----------+--------------+
+1 row in set (0.000 sec)
+
+

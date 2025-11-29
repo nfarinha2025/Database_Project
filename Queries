@@ -1,0 +1,36 @@
+Query 1: SELECT with ORDER BY two or more columns
+This query retrieves players ordered first by their position and then by squad number. Coaches might use this to quickly see the roster grouped by role and sorted by jersey number.
+
+MariaDB [liverpool_fc]> SELECT player_id, first_name, last_name, position, squad_number
+    -> FROM players
+    -> ORDER BY position ASC, squad_number ASC;
++-----------+------------+--------------------+------------+--------------+
+        | player_id | first_name | last_name          | position   | squad_number |
+        +-----------+------------+--------------------+------------+--------------+
+        |         2 | Virgil     | van Dijk           | Defender   |            4 |
+        |        19 | Ibrahima   | Konate             | Defender   |            5 |
+        |        13 | Joe        | Gomez              | Defender   |           12 |
+        |         6 | Andrew     | Robertson          | Defender   |           26 |
+        |        12 | Joel       | Matip              | Defender   |           32 |
+        |         4 | Trent      | Alexander-Arnold   | Defender   |           66 |
+        |         8 | Roberto    | Firmino            | Forward    |            9 |
+        |         9 | Sadio      | Mané               | Forward    |           10 |
+        |         1 | Mohamed    | Salah              | Forward    |           11 |
+        |        22 | Daniel     | Sturridge          | Forward    |           15 |
+        |        17 | Diogo      | Jota               | Forward    |           20 |
+        |        15 | Luis       | Diaz               | Forward    |           23 |
+        |        16 | Darwin     | Nunez              | Forward    |           27 |
+        |         3 | Alisson    | Becker             | Goalkeeper |            1 |
+        |        24 | Pepe       | Reina              | Goalkeeper |           25 |
+        |        20 | Caoimhin   | Kelleher           | Goalkeeper |           62 |
+        |         7 | Fabinho    | Tavares            | Midfielder |            3 |
+        |        18 | Thiago     | Alcantara          | Midfielder |            6 |
+        |        10 | James      | Milner             | Midfielder |            7 |
+        |        11 | Naby       | Keita              | Midfielder |            8 |
+        |        25 | Steven     | Gerrard            | Midfielder |            8 |
+        |        23 | Philippe   | Coutinho           | Midfielder |           10 |
+        |         5 | Jordan     | Henderson          | Midfielder |           14 |
+        |        21 | Alex       | Oxlade-Chamberlain | Midfielder |           15 |
+        |        14 | Curtis     | Jones              | Midfielder |           17 |
+        +-----------+------------+--------------------+------------+--------------+
+        25 rows in set (0.034 sec)

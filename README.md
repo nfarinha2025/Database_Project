@@ -104,3 +104,78 @@ PLAYER_STATS — Stores all match-specific performance data such as goals, assis
 INJURIES — Tracks player injuries, injury types, and expected recovery dates so coaches and staff can monitor availability.
 
 STAFF — Stores non-player personnel such as coaches, physios, and analysts, with their roles and hire dates.
+
+---
+
+### Create Tables
+```
+CREATE TABLE players (
+    player_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    birthdate DATE,
+    position VARCHAR(30),
+    nationality VARCHAR(30),
+    squad_number INT(11)
+);
+
+CREATE TABLE matches (
+    match_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    match_date DATE,
+    venue VARCHAR(10),
+    opponent_id INT(11),
+    competition_id INT(11),
+    FOREIGN KEY (opponent_id) REFERENCES opponents(opponent_id),
+    FOREIGN KEY (competition_id) REFERENCES competitions(competition_id)
+);
+
+CREATE TABLE player_stats (
+    stat_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    player_id INT(11),
+    match_id INT(11),
+    minutes_played INT(11),
+    goals INT(11),
+    assists INT(11),
+    shots INT(11),
+    passes INT(11),
+    FOREIGN KEY (player_id) REFERENCES players(player_id),
+    FOREIGN KEY (match_id) REFERENCES matches(match_id)
+);
+
+CREATE TABLE injuries (
+    injury_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    player_id INT(11),
+    injury_type VARCHAR(100),
+    date_injured DATE,
+    expected_return DATE,
+    FOREIGN KEY (player_id) REFERENCES players(player_id)
+);
+
+CREATE TABLE staff (
+    staff_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    hire_date DATE,
+    role_id INT(11),
+    FOREIGN KEY (role_id) REFERENCES staff_roles(role_id)
+);
+
+CREATE TABLE staff_roles (
+    role_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE opponents (
+    opponent_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    opponent_name VARCHAR(100) NOT NULL,
+    country VARCHAR(50),
+    stadium VARCHAR(100)
+);
+
+CREATE TABLE competitions (
+    competition_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    competition_name VARCHAR(100) NOT NULL,
+    competition_type VARCHAR(50)
+);
+
+```

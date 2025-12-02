@@ -14,7 +14,78 @@ End users will interact with the database through SQL queries, views, and dashbo
 
 2.ER Model
 
-![Liverpool ER Diagram](liverpool_ER.png)
+``` mermaid
+erDiagram
+    PLAYERS {
+        INT player_id PK
+        VARCHAR(50) first_name
+        VARCHAR(50) last_name
+        DATE birthdate
+        VARCHAR(30) position
+        VARCHAR(30) nationality
+        INT squad_number
+    }
+
+    MATCHES {
+        INT match_id PK
+        DATE match_date
+        VARCHAR(10) venue
+        INT opponent_id FK
+        INT competition_id FK
+    }
+
+    PLAYER_STATS {
+        INT stat_id PK
+        INT player_id FK
+        INT match_id FK
+        INT minutes_played
+        INT goals
+        INT assists
+        INT shots
+        INT passes
+    }
+
+    INJURIES {
+        INT injury_id PK
+        INT player_id FK
+        VARCHAR(100) injury_type
+        DATE date_injured
+        DATE expected_return
+    }
+
+    STAFF {
+        INT staff_id PK
+        VARCHAR(50) first_name
+        VARCHAR(50) last_name
+        DATE hire_date
+        INT role_id FK
+    }
+
+    STAFF_ROLES {
+        INT role_id PK
+        VARCHAR(50) role_name
+    }
+
+    OPPONENTS {
+        INT opponent_id PK
+        VARCHAR(100) opponent_name
+        VARCHAR(50) country
+        VARCHAR(100) stadium
+    }
+
+    COMPETITIONS {
+        INT competition_id PK
+        VARCHAR(100) competition_name
+        VARCHAR(50) competition_type
+    }
+
+    PLAYERS ||--o{ PLAYER_STATS : "records stats"
+    MATCHES ||--o{ PLAYER_STATS : "includes stats"
+    PLAYERS ||--o{ INJURIES : "suffers"
+    STAFF   ||--|| STAFF_ROLES : "assigned"
+    MATCHES }o--|| OPPONENTS : "against"
+    MATCHES }o--|| COMPETITIONS : "part of"
+```
 
 Overall Design Description 
 

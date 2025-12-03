@@ -454,6 +454,7 @@ The Total Goals by Player report uses a clustered bar chart to compare cumulativ
 
 ## Delete
 ```sql
+SET FOREIGN_KEY_CHECKS = 0;
 -- Drop views first (if any exist)
 DROP VIEW IF EXISTS player_stats_view;
 DROP VIEW IF EXISTS match_summary_view;

@@ -369,13 +369,15 @@ WHERE player_id = 1;
 
 # Liverpool Player Performance Reports
 
-## Total Goals by Player
-A clustered bar chart compares cumulative goals across players.
+## Reports
 
-![Bar Chart of Total Goals](bar_chart.png)
+- [Total Goals by Player (PDF)](Total%20Goals%20by%20Player.pdf)
+- [Goals per Match Report (PDF)](Goals%20per%20Match%20Report.pdf)
 
-## Goals per Match Report
-A table lists match dates, opponents, and goals scored by Salah, Díaz, and Núñez.
 
-![Table Report of Goals per Match](table_report.png)
+## Description
+These reports were created using **Microsoft Power BI**, a business intelligence and visualization tool that allows data to be transformed into interactive charts and tables. Power BI was chosen because it makes it easy to connect datasets, build visuals, and share insights in a professional format.
+
+The **Total Goals by Player** report uses a clustered bar chart to compare cumulative goals across players, highlighting overall contributions and identifying top scorers. The **Goals per Match Report** presents a table showing match dates, opponents, and goals scored by Salah, Díaz, and Núñez, providing granular, game‑by‑game insights. Together, the reports demonstrate both high‑level trends and detailed match analysis, strengthening the evaluation of player impact.
+
 

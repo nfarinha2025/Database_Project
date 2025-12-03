@@ -289,3 +289,80 @@ INSERT INTO player_stats (stat_id, player_id, match_id, minutes_played, goals, a
 (64, 3, 1, 90, 0, 0, 0, 25),
 (65,
 ```
+
+### Queries
+
+```sql
+-- SELECT using ORDER BY two or more columns.
+
+SELECT player_id, first_name, last_name, position, squad_number
+FROM players
+ORDER BY position ASC, squad_number ASC;
+
+-- SELECT using a calculated field with a meaningful column heading.
+
+SELECT stat_id, player_id, match_id,
+       minutes_played / 60 AS hours_played
+FROM player_stats
+LIMIT 5;
+
+-- SELECT using a MariaDB function
+
+SELECT match_id, match_date, MONTH(match_date) AS match_month
+FROM matches
+LIMIT 5;
+
+-- SELECT with an aggregation
+
+SELECT player_id, SUM(goals) AS total_goals
+FROM player_stats
+GROUP BY player_id
+HAVING SUM(goals) > 5
+ORDER BY total_goals DESC;
+
+-- Join of three or more tables
+
+SELECT p.first_name, p.last_name, m.match_date, ps.goals
+FROM player_stats ps
+INNER JOIN players p ON ps.player_id = p.player_id
+INNER JOIN matches m ON ps.match_id = m.match_id
+WHERE ps.goals > 0
+LIMIT 5;
+
+--Left JOIN
+
+SELECT s.staff_id, s.first_name, s.last_name, sr.role_name
+FROM staff s
+LEFT JOIN staff_roles sr ON s.role_id = sr.role_id;
+
+-- UPDATE query
+
+UPDATE staff
+SET role_id = 4
+WHERE staff_id = 1;
+
+-- DELETE query
+
+DELETE FROM injuries
+WHERE injury_id = 12;
+
+-- Create a Transaction with either ROLLBACK or COMMIT and demonstrate this transaction.
+
+START TRANSACTION;
+
+UPDATE players
+SET squad_number = 99
+WHERE player_id = 1;
+
+-- Check temporary change
+SELECT player_id, first_name, last_name, squad_number
+FROM players
+WHERE player_id = 1;
+
+ROLLBACK;
+
+-- Verify rollback
+SELECT player_id, first_name, last_name, squad_number
+FROM players
+WHERE player_id = 1;
+

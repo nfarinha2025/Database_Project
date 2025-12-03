@@ -375,9 +375,11 @@ WHERE player_id = 1;
 - [Goals per Match Report (PDF)](Goals%20per%20Match%20Report.pdf)
 
 
-## Description
-These reports were created using **Microsoft Power BI**, a business intelligence and visualization tool that allows data to be transformed into interactive charts and tables. Power BI was chosen because it makes it easy to connect datasets, build visuals, and share insights in a professional format.
+These reports were built in **Microsoft Power BI**, a tool that makes it easy to turn data into clear visuals.
 
-The **Total Goals by Player** report uses a clustered bar chart to compare cumulative goals across players, highlighting overall contributions and identifying top scorers. The **Goals per Match Report** presents a table showing match dates, opponents, and goals scored by Salah, Díaz, and Núñez, providing granular, game‑by‑game insights. Together, the reports demonstrate both high‑level trends and detailed match analysis, strengthening the evaluation of player impact.
+## Description
+
+The Total Goals by Player report uses a clustered bar chart to compare cumulative goals across players. This visualization makes it easy to identify top scorers and quickly assess overall contributions. Salah stands out as the most consistent scorer, while Díaz and Núñez provide secondary support. The Goals per Match Report presents a table showing match dates, opponents, and goals scored by Salah, Díaz, and Núñez. This format highlights game‑by‑game contributions, revealing patterns such as Salah’s steady scoring and the more variable outputs of Díaz and Núñez. Together, the chart and table provide both a high‑level overview and detailed match insights. The combination demonstrates how Power BI can be used to capture trends and granular detail, strengthening the analysis of player impact.
+
 
 

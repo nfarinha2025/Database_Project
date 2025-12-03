@@ -365,4 +365,17 @@ ROLLBACK;
 SELECT player_id, first_name, last_name, squad_number
 FROM players
 WHERE player_id = 1;
+```
+
+# Liverpool Player Performance Reports
+
+## Total Goals by Player
+A clustered bar chart compares cumulative goals across players.
+
+![Bar Chart of Total Goals](bar_chart.png)
+
+## Goals per Match Report
+A table lists match dates, opponents, and goals scored by Salah, Díaz, and Núñez.
+
+![Table Report of Goals per Match](table_report.png)
 

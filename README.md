@@ -107,7 +107,7 @@ STAFF — Stores non-player personnel such as coaches, physios, and analysts, wi
 
 ---
 
-### Create Tables
+## Create Tables
 ```sql
 
 -- Base tables
@@ -185,7 +185,7 @@ CREATE TABLE injuries (
 
 ```
 
-### Insert Data
+## Insert Data
 
 ```sql
 -- PLAYERS
@@ -294,7 +294,7 @@ INSERT INTO player_stats (stat_id, player_id, match_id, minutes_played, goals, a
 (65,
 ```
 
-### Queries
+## Queries
 
 ```sql
 -- SELECT using ORDER BY two or more columns.
@@ -380,10 +380,29 @@ WHERE player_id = 1;
 
 
 These reports were built in **Microsoft Power BI**, a tool that makes it easy to turn data into clear visuals.
+##
 
 ## Description
 
 The Total Goals by Player report uses a clustered bar chart to compare cumulative goals across players. This visualization makes it easy to identify top scorers and quickly assess overall contributions. Salah stands out as the most consistent scorer, while Díaz and Núñez provide secondary support. The Goals per Match Report presents a table showing match dates, opponents, and goals scored by Salah, Díaz, and Núñez. This format highlights game‑by‑game contributions, revealing patterns such as Salah’s steady scoring and the more variable outputs of Díaz and Núñez. Together, the chart and table provide both a high‑level overview and detailed match insights. The combination demonstrates how Power BI can be used to capture trends and granular detail, strengthening the analysis of player impact.
+##
 
+## Delete
+```sql
+-- Drop views first (if any exist)
+DROP VIEW IF EXISTS player_stats_view;
+DROP VIEW IF EXISTS match_summary_view;
+DROP VIEW IF EXISTS staff_roles_view;
+
+-- Drop tables 
+DROP TABLE IF EXISTS player_stats;
+DROP TABLE IF EXISTS matches;
+DROP TABLE IF EXISTS players;
+DROP TABLE IF EXISTS injuries;
+DROP TABLE IF EXISTS staff;
+DROP TABLE IF EXISTS staff_roles;
+DROP TABLE IF EXISTS opponents;
+DROP TABLE IF EXISTS competitions;
+```
 
 

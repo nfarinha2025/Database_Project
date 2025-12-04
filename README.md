@@ -29,7 +29,7 @@ erDiagram
     MATCHES {
         INT match_id PK
         DATE match_date
-        VARCHAR(10) venue
+        VARCHAR(30) venue
         INT opponent_id FK
         INT competition_id FK
     }
@@ -82,7 +82,7 @@ erDiagram
     PLAYERS ||--o{ PLAYER_STATS : "records stats"
     MATCHES ||--o{ PLAYER_STATS : "includes stats"
     PLAYERS ||--o{ INJURIES : "suffers"
-    STAFF   ||--|| STAFF_ROLES : "assigned"
+    STAFF }o--|| STAFF_ROLES : "assigned"
     MATCHES }o--|| OPPONENTS : "against"
     MATCHES }o--|| COMPETITIONS : "part of"
 ```
@@ -232,17 +232,38 @@ INSERT INTO opponents (opponent_id, opponent_name, country, stadium) VALUES
 
 -- STAFF_ROLES
 INSERT INTO staff_roles (role_id, role_name) VALUES
-(1, 'Coach'),
-(2, 'Physio'),
-(3, 'Analyst'),
-(4, 'Manager');
+(1, 'Manager'),
+(2, 'Assistant Coach'),
+(3, 'Goalkeeping Coach'),
+(4, 'Fitness Coach'),
+(5, 'Physio'),
+(6, 'Analyst');
+
 
 -- STAFF
 INSERT INTO staff (staff_id, first_name, last_name, hire_date, role_id) VALUES
-(1, 'Jürgen', 'Klopp', '2015-10-08', NULL),
-(2, 'Arne', 'Slot', '2024-07-01', NULL),
-(3, 'Pepijn', 'Lijnders', '2014-07-01', NULL),
-(4, 'Andreas', 'Kornmayer', '2016-07-01', NULL);
+-- Manager
+(1, 'Jürgen', 'Klopp', '2015-10-08', 1),
+
+-- Assistant Coaches
+(2, 'Pepijn', 'Lijnders', '2018-06-01', 2),
+(3, 'Peter', 'Krawietz', '2015-10-08', 2),
+
+-- Goalkeeping Coach
+(4, 'John', 'Achterberg', '2009-06-01', 3),
+
+-- Fitness Coaches
+(5, 'Andreas', 'Kornmayer', '2016-07-01', 4),
+(6, 'Andreas', 'Schlumberger', '2020-12-01', 4),
+
+-- Medical / Physio
+(7, 'Lee', 'Nobes', '2018-11-01', 5),
+(8, 'Christopher', 'Roach', '2020-08-01', 5),
+
+-- Analysts
+(9, 'Greg', 'Mathieson', '2017-07-01', 6),
+(10, 'James', 'French', '2012-07-01', 6);
+
 
 -- COMPETITIONS
 INSERT INTO competitions (competition_id, competition_name, competition_type) VALUES

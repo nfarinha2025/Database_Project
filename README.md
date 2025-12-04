@@ -307,12 +307,12 @@ INSERT INTO injuries (injury_id, player_id, injury_type, date_injured, expected_
 
 -- PLAYER_STATS
 INSERT INTO player_stats (stat_id, player_id, match_id, minutes_played, goals, assists, shots, passes) VALUES
-(65, 4, 1, 90, 0, 1, 2, 70),
+(65, 1, 12, 90, 5, 1, 2, 70),
 (66, 5, 1, 85, 0, 0, 1, 55),
 (67, 6, 1, 90, 0, 0, 0, 60),
 (68, 7, 1, 75, 0, 0, 1, 40),
 (69, 8, 1, 80, 1, 0, 3, 45),
-(70, 4, 1, 90, 0, 1, 2, 70),
+(70, 4, 1, 90, 4, 1, 2, 70),
 (71, 5, 1, 85, 0, 0, 1, 55),
 (72, 6, 1, 90, 0, 0, 0, 60),
 (73, 7, 1, 75, 0, 0, 1, 40),

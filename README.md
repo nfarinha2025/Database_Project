@@ -462,7 +462,6 @@ WHERE player_id = 1;
 ## Reports
 
 - [Total Goals by Player (PDF)](Total%20Goals%20by%20Player.pdf)
-- [Goals per Match Report (PDF)](Goals%20per%20Match%20Report.pdf)
 - [Player Performance Statistics (PDF)](stats.pdf)
 
 

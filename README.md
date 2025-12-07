@@ -463,6 +463,7 @@ WHERE player_id = 1;
 
 - [Total Goals by Player (PDF)](Total%20Goals%20by%20Player.pdf)
 - [Goals per Match Report (PDF)](Goals%20per%20Match%20Report.pdf)
+- [Player Performance Statistics (PDF)](stats.pdf)
 
 
 These reports were built in **Microsoft Power BI**, a tool that makes it easy to turn data into clear visuals.

@@ -494,5 +494,4 @@ DROP TABLE IF EXISTS competitions;
 
 ## Poster
 
-- [Liverpool FC Database Poster (PDF)](Liverpool_FC_Database_Poster.pdf)
-
+- [Liverpool_fc_Poster (PDF)](Liverpool_fc_Poster.pdf)
